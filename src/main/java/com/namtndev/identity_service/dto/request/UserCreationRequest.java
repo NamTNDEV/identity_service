@@ -1,10 +1,15 @@
 package com.namtndev.identity_service.dto.request;
 
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public class UserCreationRequest {
-    private String username;
-    private String password;
+    @Size(min = 4, message = "Username must be at least 4 characters")
+    String username;
+
+    @Size(min = 6, message = "Password must be at least 6 characters")
+    String password;
     private String firstName;
     private String lastName;
     private LocalDate dob;
