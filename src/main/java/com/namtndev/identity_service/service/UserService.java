@@ -3,6 +3,8 @@ package com.namtndev.identity_service.service;
 import com.namtndev.identity_service.dto.request.UserCreationRequest;
 import com.namtndev.identity_service.dto.request.UserUpdateRequest;
 import com.namtndev.identity_service.enity.User;
+import com.namtndev.identity_service.exception.AppException;
+import com.namtndev.identity_service.libs.HttpStatus;
 import com.namtndev.identity_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ public class UserService {
         User user = new User();
 
         if(userRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("Username already exists");
+            throw new AppException(HttpStatus.USER_ALREADY_EXISTS);
         }
 
         user.setUsername(request.getUsername());
